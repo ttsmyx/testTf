@@ -1,4 +1,4 @@
-package cn.novots.test.model;
+package cn.novots.test.model.list;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data 
-public class StaffPicksFeed implements Serializable {
+public class RecommendedPostsFeed implements Serializable {
 
 	/**
 	 * 

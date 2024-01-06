@@ -1,4 +1,4 @@
-package cn.novots.test.model;
+package cn.novots.test.model.list;
 
 import java.io.Serializable;
 
@@ -14,5 +14,7 @@ public class NextInfo implements Serializable {
 	private int limit;
 
 	private String from;
+	
+	private String to;
 
 }

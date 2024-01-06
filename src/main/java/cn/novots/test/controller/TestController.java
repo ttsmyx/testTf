@@ -2,18 +2,16 @@ package cn.novots.test.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,23 +50,25 @@ public class TestController {
 
 	@GetMapping(value = "/download")
 	public void download(HttpServletResponse response, HttpServletRequest request) {
-		System.out.println("11111111111");
-
+		log.info("download.start");
 		List<PostVo> pdfList = TestServiceImpl.pdfList;
-		System.out.println("pdfList=" + pdfList.size());
+		log.info("download.start.list={}", pdfList.size());
+		if (CollectionUtils.isEmpty(pdfList)) {
+			log.error("download.list.null");
+			return;
+		}
 		List<UploadResult> files = new ArrayList<UploadResult>();
 		for (PostVo vo : pdfList) {
 			List<TextVo> list = vo.getViewerEdge().getFullContent().getBodyModel().getParagraphs();
 			UploadResult file = PdfCommon.generatePDF(list, vo.getId(), vo.getTitleName());
 			files.add(file);
 		}
-
 		try {
 			writePdfZip(files, response);
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			log.info("download.error", e);
 		}
+		log.info("download.end");
 	}
 
 	public static void writePdfZip(List<UploadResult> files, HttpServletResponse response) throws Exception {
@@ -87,6 +87,12 @@ public class TestController {
 			zipOutputStream.flush();
 			inputStream.close();
 			zipOutputStream.closeEntry();
+
+		}
+		// 删除文件
+		for (UploadResult filePath : files) {
+			File file = new File(filePath.getPath());
+			file.delete();
 		}
 		// 关闭各种流
 		zipOutputStream.closeEntry();

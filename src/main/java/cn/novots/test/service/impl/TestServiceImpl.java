@@ -57,7 +57,7 @@ public class TestServiceImpl implements TestService {
 			DataPost dataPost = datalist.get(i);
 			test.getDetail(dataPost.getId(),dataPost.getTitle());
 		}
-		log.info("pdfList.size ={}", datalist.size());
+		log.info("pdfList.size ={}", pdfList.size());
 	}
 
 	public PostVo getDetail(String postId,String titleName) {

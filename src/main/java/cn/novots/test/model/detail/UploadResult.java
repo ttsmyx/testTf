@@ -5,15 +5,13 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class PostVo implements Serializable {
-	/**
-	* 
-	*/
+public class UploadResult implements Serializable{/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
-	private String id;
+	private String path;
 	
-	private String titleName;
-
-	private ViewerEdge viewerEdge;
+	private String name;
+	
 }

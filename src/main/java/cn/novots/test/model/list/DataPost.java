@@ -15,4 +15,6 @@ public class DataPost implements Serializable{
 	private String id;
 	
 	private long clapCount;
+	
+	private String title;
 }

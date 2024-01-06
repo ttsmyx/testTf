@@ -31,16 +31,18 @@
 	</properties>
 
 	<dependencies>
-		<!-- 公共依赖  -->
-		<dependency>
-			<groupId>cn.novots.date</groupId>
-			<artifactId>lark-date-common</artifactId>
-			<version>1.0.0</version>
-		</dependency>
 		<dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+        <dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+		</dependency>
 		<!-- 注解依赖  -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
